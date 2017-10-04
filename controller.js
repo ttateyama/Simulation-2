@@ -14,10 +14,14 @@ module.exports = {
   getBins: (req, res, next) =>{
     const dbInstance = req.app.get('db');
     const { shelfLetter } = req.params
+    const binArray = [null,null,null,null,null];
 
     dbInstance.get_bins({shelfLetter})
       .then( bins => {
-        res.status(200).send( bins );
+        bins.forEach((bin)=>{
+          binArray.splice(bin.binnumber-1,1,bin);
+        })
+        res.status(200).send( binArray );
       })
       .catch( err => {
         res.status(500).send(err);

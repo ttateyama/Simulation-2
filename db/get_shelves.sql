@@ -1,1 +1,1 @@
-SELECT * FROM Shelves;
+SELECT DISTINCT ShelfLetter FROM bins;
